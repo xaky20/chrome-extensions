@@ -278,18 +278,23 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 	if (battlePoint > 0) {
 		//choose challenger
 		var xaky_table = document.querySelectorAll('table')[5];
-		var challengerIndex = [];
-		for (var i = 0; i < xaky_table.rows.length; i++) {
+		var canBattle = false;
+		var i = 0;
+		while (!canBattle) {
 			if ((xaky_table.rows[i].cells[3].innerText[0]-0 || 3) < 3) {
-				challengerIndex.push(i);
-				//console.log(challengerIndex);
-				xaky_table.rows[challengerIndex[0]].click();
+				canBattle = true;
+				xaky_table.rows[i].click();
 				setTimeout(function() {
-					console.log(challengerIndex[0]);
 					document.querySelector('.blue_button_L').click();
 				}, myRandom('challengeTower', 500, 1000));
 			}
+			i++;
+			console.log(i);
+			if (i > 101) {
+				canBattle = true;
+			}
 		}
+		
 	} else {
 		setTimeout(function() {
 			window.location = '/home.html';
