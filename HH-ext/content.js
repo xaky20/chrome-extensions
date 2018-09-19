@@ -160,7 +160,7 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 	console.log('ARENA BATTLE');
 	
 	setTimeout(function() {
-		document.querySelectorAll('button.short')[0].click();
+		document.querySelectorAll('button[rel="launch"]')[0].click();
 	}, myRandom('fight', 1000, 4500));
 	
 	setTimeout(function() {
