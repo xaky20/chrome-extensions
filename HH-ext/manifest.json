@@ -1,0 +1,24 @@
+{
+	"manifest_version": 2,
+	"version": "0.1",
+	
+	"name": "HH auto-battle",
+	"description": "Battle automatically",
+	"author": "Xaky",
+	
+	"content_scripts": [{
+		"js": ["content.js"],
+		"matches": ["https://www.hentaiheroes.com/*"]
+	}],
+	
+	"permissions": [
+		"storage"
+	],
+	
+    "icons": {
+		"16": "img/HH16.png",
+		"32": "img/HH32.png",
+		"48": "img/HH48.png",
+		"128": "img/HH128.png"
+    }
+}

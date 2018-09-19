@@ -1,0 +1,26 @@
+{
+	"manifest_version": 2,
+	
+	"name": "WW & novelplanet customization",
+	"version": "0.1",
+	"description": "Make content more readable and remove sidebar",
+	"author": "Xaky",
+	
+	"content_scripts": [{
+	"js": ["wuxiaworld.js"],
+	"matches": ["https://www.wuxiaworld.com/*"]
+	},{
+	"js": ["novelplanet.js"],
+	"matches": ["https://novelplanet.com/*"]
+	},{
+	"js": ["m-ww-co.js"],
+	"matches": ["http://m.wuxiaworld.co/*"]
+	}],
+	
+    "icons": {
+      "16": "img/dragon16.png",
+      "32": "img/dragon32.png",
+      "48": "img/dragon48.png",
+      "128": "img/dragon128.png"
+    }
+}
