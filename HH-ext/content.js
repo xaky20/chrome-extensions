@@ -123,7 +123,7 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 			checkFreeGame();
 			console.log('Check done');
 			check_interval();
-		}, myRandom('next check', 15000, 75000));
+		}, myRandom('next check', 45000, 90000));
 	}
 
 	setTimeout(function() {
@@ -275,22 +275,25 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 	//check battle point
 	var battlePoint = (document.querySelectorAll('span[energy]')[2].innerText-0) || 0;
 	console.log('Challenge point: ' + battlePoint);
+	var xaky_table = document.querySelectorAll('table')[5];
+	var canBattle = false;
+	var challenger, challengerFight;
+	var i = -1;
 	if (battlePoint > 0) {
 		//choose challenger
-		var xaky_table = document.querySelectorAll('table')[5];
-		var canBattle = false;
-		var i = 0;
 		while (!canBattle) {
-			if ((xaky_table.rows[i].cells[3].innerText[0]-0 || 3) < 3) {
+			i++;
+			console.log(i);
+			challenger = xaky_table.rows[i];
+			challengerFight = challenger.cells[3].innerText[0] - 0;
+			if (!challengerFight.isNaN && challengerFight < 3) {
 				canBattle = true;
 				xaky_table.rows[i].click();
 				setTimeout(function() {
 					document.querySelector('.blue_button_L').click();
 				}, myRandom('challengeTower', 500, 1000));
 			}
-			i++;
-			console.log(i);
-			if (i > 101) {
+			if (i > 100) {
 				canBattle = true;
 			}
 		}
