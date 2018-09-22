@@ -33,3 +33,29 @@ var views = document.querySelectorAll('.fr-view');
 for (var i = 0; i < views.length; i++) {
 	views[i].style.padding = '12px';
 }
+
+var chapterTitle = document.querySelector('.caption.clearfix h4');
+var chapterName = document.querySelector('.fr-view p b');
+
+function addToggleButton(elem) {
+	elem.style.display = 'none';
+	
+	var element = document.createElement("input");
+	element.type = 'button';
+	element.value = 'show';
+	element.onclick = function() { // Note this is a function
+		if (elem.style.display === 'none') {
+			elem.style.display = '';
+			element.value = 'hide';
+		} else {
+			elem.style.display = 'none';
+			element.value = 'show';
+		}
+	};
+
+	//elem.parentNode.appendChild(element);
+	elem.parentNode.insertBefore(element, elem);
+}
+
+addToggleButton(chapterName);
+addToggleButton(chapterTitle);
