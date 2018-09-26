@@ -35,7 +35,7 @@ for (var i = 0; i < views.length; i++) {
 }
 
 var chapterTitle = document.querySelector('.caption.clearfix h4');
-var chapterName = document.querySelector('.fr-view p b');
+var chapterName = document.querySelectorAll('.fr-view p')[0];
 
 function addToggleButton(elem) {
 	elem.style.display = 'none';
@@ -57,5 +57,7 @@ function addToggleButton(elem) {
 	elem.parentNode.insertBefore(element, elem);
 }
 
-addToggleButton(chapterName);
+if (chapterName.innerText.indexOf('hapter') !== -1) {
+	addToggleButton(chapterName);
+}
 addToggleButton(chapterTitle);

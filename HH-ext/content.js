@@ -13,11 +13,19 @@ function upgrade(number, times) {
 	var interval = setInterval(function() {
 		i++;
 		console.log(i);
-		document.querySelector('div[hero="carac'+number+'"] span').click();
+		//document.querySelector('div[hero="carac'+number+'"] span').click();
+		xkevent(document.querySelector('div[hero="carac'+number+'"] span'), 'click');
 		if (i>=times){
 			clearInterval(interval);
 		}
 	}, 250);
+}
+
+function xkevent(node, eventType) {
+	var event = node.ownerDocument.createEvent('HTMLEvents');
+	event.initEvent(eventType, true, false);
+	event.synthetic = true;
+	node.dispatchEvent(event);
 }
 
 setTimeout(function() {
@@ -32,7 +40,8 @@ var login = document.querySelectorAll('a[rel="phoenix_member_login"]');
 if (login.length !== 0) {
 	console.log('LOGIN');
 	
-	login[0].click();
+	//login[0].click();
+	xkevent(login[0], 'click');
 	var inputs = document.querySelectorAll('input');
 	var last_connected;
 	
@@ -53,7 +62,8 @@ if (login.length !== 0) {
 			//console.log('last_connected saved with value ' + !last_connected);
 			
 			setTimeout(function() {
-				document.querySelectorAll('.steel2.b_m')[0].click();
+				xkevent(document.querySelectorAll('.steel2.b_m')[0], 'click');
+				//document.querySelectorAll('.steel2.b_m')[0].click();
 			}, myRandom('login', 500, 3000));
 		});
 	});
@@ -67,7 +77,8 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 	var checkCollect = function() {
 		var collect = document.getElementById('collect_all');
 		if (collect.style.display !== 'none') {
-			collect.click();
+			//collect.click();
+			xkevent(collect, 'click');
 		}
 		// console.log('collect checked');
 	}
@@ -147,7 +158,8 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 		}, myRandom('towerOfFame', 1000, 3000));
 	} else {
 		setTimeout(function() {
-			blueButtons[1].click();
+			//blueButtons[1].click();
+			xkevent(blueButtons[1], 'click');
 		}, myRandom('arena battle', 1000, 3000));
 	}
 	
@@ -160,7 +172,8 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 	console.log('ARENA BATTLE');
 	
 	setTimeout(function() {
-		document.querySelectorAll('button[rel="launch"]')[0].click();
+		//document.querySelectorAll('button[rel="launch"]')[0].click();
+		xkevent(document.querySelector('button[rel="launch"]'), 'click');
 	}, myRandom('fight', 1000, 4500));
 	
 	setTimeout(function() {
@@ -178,7 +191,8 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 		var purpleButtons = document.querySelectorAll('button.purple_text_button');
 		for(var i = 0; i < purpleButtons.length; i++){
 			if (purpleButtons[i].style.display !== 'none') {
-				purpleButtons[i].click();
+				//purpleButtons[i].click();
+				xkevent(purpleButtons[i], 'click');
 				setTimeout(function() {
 					window.location = '/activities.html';
 				}, myRandom('activities', 1500, 4500));
@@ -193,7 +207,8 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 	if (blueButtons[0].innerText.indexOf('Continue') !== -1) {
 		if (document.querySelector('.after_gift').style.display !== 'block') {
 			setTimeout(function() {
-				document.querySelector('.end_gift button').click();
+				//document.querySelector('.end_gift button').click();
+				xkevent(document.querySelector('.end_gift button'), 'click');
 			}, myRandom('end gift', 1000, 3000));
 			setTimeout(function() {
 				window.location = '/activities.html';
@@ -206,7 +221,8 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 			claim();
 		} else {
 			setTimeout(function() {
-				blueButtons[0].click();
+				//blueButtons[0].click();
+				xkevent(blueButtons[0], 'click');
 			}, myRandom('mission start', 1000, 3000));
 			setTimeout(function() {
 				window.location = '/intro.php?phoenix_member=logout';
@@ -221,7 +237,8 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 	
 	if (typeof WORLD !== 'undefined') {
 		setTimeout(function() {
-			document.querySelectorAll('button[rel="launch"]')[0].click();
+			//document.querySelectorAll('button[rel="launch"]')[0].click();
+			xkevent(document.querySelector('button[rel="launch"]'), 'click');
 		}, myRandom('fight', 1000, 3000));
 		
 		setTimeout(function() {
@@ -253,7 +270,8 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 	
 	if (document.querySelector('button.blue_text_button[free="1"]')) {
 		setTimeout(function() {
-			document.querySelector('button.blue_text_button[free="1"]').click();
+			//document.querySelector('button.blue_text_button[free="1"]').click();
+			xkevent(document.querySelector('button.blue_text_button[free="1"]'), 'click');
 		}, myRandom('free', 5000, 8000));
 	}
 	setTimeout(function() {
@@ -288,9 +306,11 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 			challengerFight = challenger.cells[3].innerText[0] - 0;
 			if (!challengerFight.isNaN && challengerFight < 3) {
 				canBattle = true;
-				xaky_table.rows[i].click();
+				//xaky_table.rows[i].click();
+				xkevent(xaky_table.rows[i], 'click');
 				setTimeout(function() {
-					document.querySelector('.blue_button_L').click();
+					//document.querySelector('.blue_button_L').click();
+					xkevent(document.querySelector('.blue_button_L'), 'click');
 				}, myRandom('challengeTower', 500, 1000));
 			}
 			if (i > 100) {
@@ -313,7 +333,8 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 	console.log('LEAGUE BATTLE');
 	
 	setTimeout(function() {
-		document.querySelector('.green_text_button').click();
+		var xknode = document.querySelector('button[rel="launch"]');
+		xkevent(xknode, 'click');
 	}, myRandom('home', 1000, 3000));
 	
 	setTimeout(function() {
