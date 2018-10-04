@@ -62,8 +62,8 @@ if (login.length !== 0) {
 			//console.log('last_connected saved with value ' + !last_connected);
 			
 			setTimeout(function() {
-				xkevent(document.querySelectorAll('.steel2.b_m')[0], 'click');
-				//document.querySelectorAll('.steel2.b_m')[0].click();
+				//xkevent(document.querySelectorAll('.steel2.b_m')[0], 'click');
+				document.querySelectorAll('.steel2.b_m')[0].click();
 			}, myRandom('login', 500, 3000));
 		});
 	});
@@ -302,6 +302,9 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 		while (!canBattle) {
 			i++;
 			console.log(i);
+			if (i = 100) {
+				break;
+			}
 			challenger = xaky_table.rows[i];
 			challengerFight = challenger.cells[3].innerText[0] - 0;
 			if (!challengerFight.isNaN && challengerFight < 3) {
@@ -312,16 +315,10 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 					//document.querySelector('.blue_button_L').click();
 					xkevent(document.querySelector('.blue_button_L'), 'click');
 				}, myRandom('challengeTower', 500, 1000));
-			}
-			if (i > 100) {
-				canBattle = true;
+				break;
 			}
 		}
 		
-	} else {
-		setTimeout(function() {
-			window.location = '/home.html';
-		}, myRandom('home', 3000, 6000));
 	}
 	
 	setTimeout(function() {
