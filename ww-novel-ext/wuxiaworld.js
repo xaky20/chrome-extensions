@@ -35,7 +35,7 @@ for (var i = 0; i < views.length; i++) {
 }
 
 var chapterTitle = document.querySelector('.caption.clearfix h4');
-var chapterName = document.querySelectorAll('.fr-view p')[0];
+var chapterName = document.querySelectorAll('.fr-view p');
 
 function addToggleButton(elem) {
 	elem.style.display = 'none';
@@ -57,7 +57,9 @@ function addToggleButton(elem) {
 	elem.parentNode.insertBefore(element, elem);
 }
 
-if (chapterName.innerText.indexOf('hapter') !== -1) {
-	addToggleButton(chapterName);
-}
 addToggleButton(chapterTitle);
+if (chapterName[0].innerText.indexOf('hapter') !== -1) {
+	addToggleButton(chapterName[0]);
+} else if (chapterName[1].innerText.indexOf('hapter') !== -1) {
+	addToggleButton(chapterName[1]);
+}

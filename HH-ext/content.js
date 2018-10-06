@@ -302,20 +302,20 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 		while (!canBattle) {
 			i++;
 			console.log(i);
-			if (i = 100) {
-				break;
-			}
-			challenger = xaky_table.rows[i];
-			challengerFight = challenger.cells[3].innerText[0] - 0;
-			if (!challengerFight.isNaN && challengerFight < 3) {
+			if (i > 99) {
 				canBattle = true;
-				//xaky_table.rows[i].click();
-				xkevent(xaky_table.rows[i], 'click');
-				setTimeout(function() {
-					//document.querySelector('.blue_button_L').click();
-					xkevent(document.querySelector('.blue_button_L'), 'click');
-				}, myRandom('challengeTower', 500, 1000));
-				break;
+			} else {
+				challenger = xaky_table.rows[i];
+				challengerFight = challenger.cells[3].innerText[0] - 0;
+				if (!challengerFight.isNaN && challengerFight < 3) {
+					canBattle = true;
+					//xaky_table.rows[i].click();
+					xkevent(xaky_table.rows[i], 'click');
+					setTimeout(function() {
+						//document.querySelector('.blue_button_L').click();
+						xkevent(document.querySelector('.blue_button_L'), 'click');
+					}, myRandom('challengeTower', 500, 1000));
+				}
 			}
 		}
 		
