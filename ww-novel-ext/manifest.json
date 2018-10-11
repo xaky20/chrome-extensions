@@ -15,6 +15,9 @@
 	},{
 	"js": ["m-ww-co.js"],
 	"matches": ["http://m.wuxiaworld.co/*"]
+	},{
+	"js": ["kissmanga.js"],
+	"matches": ["http://kissmanga.com/*"]
 	}],
 	
     "icons": {

@@ -296,13 +296,13 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 	var xaky_table = document.querySelectorAll('table')[5];
 	var canBattle = false;
 	var challenger, challengerFight;
-	var i = -1;
+	var i = 100;
 	if (battlePoint > 0) {
 		//choose challenger
 		while (!canBattle) {
-			i++;
+			i--;
 			console.log(i);
-			if (i > 99) {
+			if (i < 0) {
 				canBattle = true;
 			} else {
 				challenger = xaky_table.rows[i];
