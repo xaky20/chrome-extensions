@@ -290,35 +290,41 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 } else if (window.location.href.indexOf('/tower-of-fame.html') !== -1) {
 	console.log('TOWER OF FAME');
 	
-	//check battle point
-	var battlePoint = (document.querySelectorAll('span[energy]')[2].innerText-0) || 0;
-	console.log('Challenge point: ' + battlePoint);
 	var xaky_table = document.querySelectorAll('table')[5];
-	var canBattle = false;
-	var challenger, challengerFight;
-	var i = 100;
-	if (battlePoint > 0) {
-		//choose challenger
-		while (!canBattle) {
-			i--;
-			console.log(i);
-			if (i < 0) {
-				canBattle = true;
-			} else {
-				challenger = xaky_table.rows[i];
-				challengerFight = challenger.cells[3].innerText[0] - 0;
-				if (!challengerFight.isNaN && challengerFight < 3) {
+	if (xaky_table) {
+		//check battle point
+		var battlePoint = (document.querySelectorAll('span[energy]')[2].innerText-0) || 0;
+		console.log('Challenge point: ' + battlePoint);
+		var canBattle = false;
+		var challenger, challengerFight;
+		var i = xaky_table.rows.length;
+		if (battlePoint > 0) {
+			//choose challenger
+			while (!canBattle) {
+				i--;
+				console.log(i);
+				if (i < 0) {
 					canBattle = true;
-					//xaky_table.rows[i].click();
-					xkevent(xaky_table.rows[i], 'click');
-					setTimeout(function() {
-						//document.querySelector('.blue_button_L').click();
-						xkevent(document.querySelector('.blue_button_L'), 'click');
-					}, myRandom('challengeTower', 500, 1000));
+				} else {
+					challenger = xaky_table.rows[i];
+					challengerFight = challenger.cells[3].innerText[0] - 0;
+					if (!challengerFight.isNaN && challengerFight < 3) {
+						canBattle = true;
+						//xaky_table.rows[i].click();
+						xkevent(xaky_table.rows[i], 'click');
+						setTimeout(function() {
+							//document.querySelector('.blue_button_L').click();
+							xkevent(document.querySelector('.blue_button_L'), 'click');
+						}, myRandom('challengeTower', 500, 1000));
+					}
 				}
 			}
 		}
-		
+	} else {
+		var purpleButton = document.querySelector('.purple_button_L');
+		if (purpleButton.display !== 'none') {
+			xkevent(purpleButton, 'click');
+		}
 	}
 	
 	setTimeout(function() {
