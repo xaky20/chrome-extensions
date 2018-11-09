@@ -27,4 +27,4 @@ setTimeout(function() {
 	console.log('Removed gogl1 cookie');
 	xaky_next = document.querySelector(".btnNext").parentElement;
 	xaky_prev = document.querySelector(".btnPrevious").parentElement;
-}, 5000);
+}, 3500);
