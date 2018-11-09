@@ -1,6 +1,7 @@
 console.log('HH-ext activated');
 console.log(window.location.href);
 
+var xkmap = {};
 
 function myRandom(name, min, max) {
 	var timer = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -22,10 +23,14 @@ function upgrade(number, times) {
 }
 
 function xkevent(node, eventType) {
-	var event = node.ownerDocument.createEvent('HTMLEvents');
-	event.initEvent(eventType, true, false);
-	event.synthetic = true;
-	node.dispatchEvent(event);
+	if (node) {
+		var event = node.ownerDocument.createEvent('HTMLEvents');
+		event.initEvent(eventType, true, false);
+		event.synthetic = true;
+		node.dispatchEvent(event);
+	} else {
+		console.log('node is null');
+	}
 }
 
 setTimeout(function() {
@@ -33,7 +38,48 @@ setTimeout(function() {
 	window.location = '/intro.php?phoenix_member=logout';
 }, myRandom('logout', 450000, 900000));
 
-//var WORLD = 3;
+function setXKVariable(xkname, xkvalue, callback) {
+	xkmap[xkname] = xkvalue;
+	chrome.storage.sync.set(xkmap, function() {
+		console.log('Set variable ' + xkname + ' to ' + xkvalue);
+		if (callback) {
+			callback();
+		}
+	});
+}
+
+function getXKVariable(xkname, callback) {
+	chrome.storage.sync.get(xkname, function(item) {
+		xkmap[xkname] = item[xkname];
+		console.log('Got variable ' + xkname + ' with value ' + xkmap[xkname]);
+		if (callback) {
+			callback();
+		}
+	});
+}
+
+function setXKFight(xkworld, xkfight, xkmin) {
+	setXKVariable('XKWORLD', xkworld);
+	setXKVariable('XKFIGHTENERGY', xkfight);
+	setXKVariable('XKMINENERGY', xkmin);
+}
+
+getXKVariable('XKWORLD', function() {
+	if (!xkmap['XKWORLD']) {
+		setXKVariable('XKWORLD', 10);
+	}
+});
+getXKVariable('XKFIGHTENERGY', function() {
+	if (!xkmap['XKFIGHTENERGY']) {
+		setXKVariable('XKFIGHTENERGY', 18);
+	}
+});
+getXKVariable('XKMINENERGY', function() {
+	if (!xkmap['XKMINENERGY']) {
+		setXKVariable('XKMINENERGY', 15);
+	}
+});
+
 var login = document.querySelectorAll('a[rel="phoenix_member_login"]');
 
 /*** LOGIN ***/
@@ -102,9 +148,9 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 	}
 	
 	var checkEnergy = function() {
-		if (typeof WORLD !== 'undefined') {
-			if (document.querySelectorAll('span[hero="energy_fight"]')[0].innerText > 0) {
-				window.location = '/world/'+WORLD;
+		if (xkmap['XKWORLD']) {
+			if (document.querySelector('.energy_counter[type="energy_fight"] span[energy]').innerText > xkmap['XKFIGHTENERGY']) {
+				window.location = '/battle.html?id_troll='+(xkmap['XKWORLD']-1);
 			}
 		}
 		// console.log('energy checked');
@@ -116,15 +162,6 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 		}
 	}
 	
-	/*var check_interval = setInterval(function() {
-			checkCollect();
-			checkArena();
-			checkActivity();
-			checkEnergy();
-			checkFreeGame();
-			console.log('Check done');
-		}, myRandom(15000, 75000));*/
-		
 	var check_interval = function() {
 		setTimeout(function() {
 			checkCollect();
@@ -235,34 +272,38 @@ if (login.length === 0 && window.location.href.indexOf('/home.html') !== -1) {
 } else if (window.location.href.indexOf('/battle.html?id_troll') !== -1) {
 	console.log('TROLL BATTLE');
 	
-	if (typeof WORLD !== 'undefined') {
-		setTimeout(function() {
-			//document.querySelectorAll('button[rel="launch"]')[0].click();
-			xkevent(document.querySelector('button[rel="launch"]'), 'click');
-		}, myRandom('fight', 1000, 3000));
-		
-		setTimeout(function() {
-			window.location = '/world/'+WORLD;
-		}, myRandom('world', 3000, 6000));
-	} else {
-		setTimeout(function() {
-			window.location = '/home.html';
-		}, myRandom('home', 6000, 12000));
-	}
+	setTimeout(function() {
+		if (xkmap['XKWORLD'] && document.querySelector('.energy_counter[type="energy_fight"] span[energy]').innerText > xkmap['XKMINENERGY']) {
+			setTimeout(function() {
+				//document.querySelectorAll('button[rel="launch"]')[0].click();
+				xkevent(document.querySelector('button[rel="launch"]'), 'click');
+			}, myRandom('fight', 1000, 3000));
+			
+			setTimeout(function() {
+				window.location = '/battle.html?id_troll='+(xkmap['XKWORLD']-1);
+			}, myRandom('world', 3000, 6000));
+		} else {
+			setTimeout(function() {
+				window.location = '/home.html';
+			}, myRandom('home', 6000, 9000));
+		}
+	}, 1500);
 	
 /*** WORLD ***/
-} else if (typeof WORLD !== 'undefined' && window.location.href.indexOf('/world/'+WORLD) !== -1) {
-	console.log('WORLD ' + WORLD);
+} else if (xkmap['XKWORLD'] && window.location.href.indexOf('/world/'+xkmap['XKWORLD']) !== -1) {
+	console.log('WORLD ' + xkmap['XKWORLD']);
 	
-	if (document.querySelectorAll('span[hero="energy_fight"]')[0].innerText > 0) {
-		setTimeout(function() {
-			window.location = '/battle.html?id_troll='+(WORLD-1);
-		}, myRandom('troll', 1000, 3000));
-	} else {
-		setTimeout(function() {
-			window.location = '/home.html';
-		}, myRandom('home', 3000, 7500));
-	}
+	setTimeout(function() {
+		if (document.querySelector('.energy_counter[type="energy_fight"] span[energy]').innerText > xkmap['XKFIGHTENERGY']) {
+			setTimeout(function() {
+				window.location = '/battle.html?id_troll='+(xkmap['XKWORLD']-1);
+			}, myRandom('troll', 1000, 3000));
+		} else {
+			setTimeout(function() {
+				window.location = '/home.html';
+			}, myRandom('home', 3000, 7500));
+		}
+	}, 1500);
 	
 /*** FREE PACHINKO ***/
 } else if (window.location.href.indexOf('/pachinko.html') !== -1) {
