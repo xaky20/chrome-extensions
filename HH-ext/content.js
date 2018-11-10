@@ -3,12 +3,6 @@ console.log(window.location.href);
 
 var xkmap = {};
 
-function myRandom(name, min, max) {
-	var timer = Math.floor(Math.random() * (max - min + 1)) + min;
-	console.log(name + ' timer: ' + timer);
-    return timer;
-}
-
 function upgrade(number, times) {
 	var i = 0;
 	var interval = setInterval(function() {
@@ -22,6 +16,12 @@ function upgrade(number, times) {
 	}, 250);
 }
 
+function myRandom(name, min, max) {
+	var timer = Math.floor(Math.random() * (max - min + 1)) + min;
+	console.log(name + ' timer: ' + timer);
+    return timer;
+}
+
 function xkevent(node, eventType) {
 	if (node) {
 		var event = node.ownerDocument.createEvent('HTMLEvents');
@@ -33,10 +33,16 @@ function xkevent(node, eventType) {
 	}
 }
 
-setTimeout(function() {
-	//window.location = '/home.html';
+var xkHomeTimeout = setTimeout(function() {
 	window.location = '/intro.php?phoenix_member=logout';
 }, myRandom('logout', 450000, 900000));
+
+function resetXKHomeTimeout() {
+	clearTimeout(xkHomeTimeout);
+	var xkHomeTimeout = setTimeout(function() {
+		window.location = '/intro.php?phoenix_member=logout';
+	}, myRandom('logout', 450000, 900000));
+}
 
 function setXKVariable(xkname, xkvalue, callback) {
 	xkmap[xkname] = xkvalue;
@@ -94,95 +100,187 @@ function getXKSwitch(callback) {
 }
 
 function createXKVariableForm() {
-	var xkdiv = document.createElement('div');
-	xkdiv.id = 'xkdiv';
-	xkdiv.style.position = 'absolute';
-	xkdiv.style.bottom = '40px';
-	xkdiv.style.right = '40px';
-	xkdiv.style.zIndex = 400;
+	
+	function createXKTrollMenu() {
+		var xkstyle = document.createElement('style');
+		xkstyle.appendChild(document.createTextNode('\n#xkFightTroll {'
+		+ 'position: absolute;'
+		+ 'z-index: 99;'
+		+ 'width: 60%;'
+		+ 'left: 50px;'
+		+ 'margin: 5px 0 0 13px;'
+		+ 'border-radius: 8px 10px 10px 8px;'
+		+ 'background: rgba(0,0,0,0.8);'
+		+ 'box-shadow: 0 0 0 1px rgba(255,255,255,0.73);'
+		+ 'font-size: 13px;'
+		+ 'text-align: center; }'
+		
+		+ '\n#xkFightTroll > .xkarrow {'
+		+ 'float:right;'
+		+ 'background-image: url("https://i.harem-battle.club/images/2017/09/19/Fmo.png");'
+		+ 'background-size: 18px 18px;'
+		+ 'background-repeat: no-repeat;'
+		+ 'width: 18px;'
+		+ 'height: 18px; }'
+		
+		+ '\n#xkFightTroll > .xkTrollMenu {'
+		+ 'position: absolute;'
+		+ 'width: 88%;'
+		+ 'margin-left:6px;'
+		+ 'border-radius: 0px 0 8px 8px;'
+		+ 'background: rgba(0,0,0,0.8);'
+		+ 'line-height: 15px;'
+		+ 'opacity: 0;'
+		+ 'visibility: hidden;'
+		+ 'transition: opacity 400ms, visibility 400ms; }'
+		
+		+ '\n#xkFightTroll:hover > .xkTrollMenu {'
+		+ 'opacity: 1;'
+		+ 'visibility: visible; }'
+		
+		+ '\n#xkFightTroll a {'
+		+ 'color: rgb(255, 255, 255);'
+		+ 'text-decoration: none; }'
+		
+		+ '\n#xkFightTroll a:hover {'
+		+ 'background: rgba(0,0,0,0.7);'
+		+ 'color: rgb(255, 247, 204);'
+		+ 'text-decoration: underline; }'));
+		document.head.appendChild(xkstyle);
 
-	var xkspan = document.createElement('span');
-	xkspan.innerHTML = 'World: ';
-	xkspan.style.color = '#000';
-	xkdiv.appendChild(xkspan);
+		var xktrolldiv = document.createElement('div');
+		xktrolldiv.id = 'xkFightTroll';
+		xktrolldiv.innerHTML = 'Fight a troll';
+		
+		var xkspan = document.createElement('span');
+		xkspan.classList.add('xkarrow');
+		xktrolldiv.appendChild(xkspan);
+		
+		var xkinnerdiv = document.createElement('div');
+		xkinnerdiv.classList.add('xkTrollMenu');
+		
+		var Trolls = ['Dark Lord', 'Ninja Spy', 'Gruntt', 'Edwarda', 'Donatien', 'Silvanus', 'Bremen', 'Finalmecia', 'Roko Senseï'];
 
-	var xkinput = document.createElement('input');
-	xkinput.id = 'xkworld';
-	xkinput.type = 'number';
-	xkinput.style.marginRight = '5px';
-	xkinput.min = 0;
-	xkinput.max = 10;
-	xkdiv.appendChild(xkinput);
-
-	var xkspan = document.createElement('span');
-	xkspan.innerHTML = 'Fight Energy: ';
-	xkspan.style.color = '#000';
-	xkdiv.appendChild(xkspan);
-
-	var xkinput = document.createElement('input');
-	xkinput.id = 'xkfightenergy';
-	xkinput.type = 'number';
-	xkinput.style.marginRight = '5px';
-	xkinput.min = 0;
-	xkinput.max = 10;
-	xkdiv.appendChild(xkinput);
-
-	var xkspan = document.createElement('span');
-	xkspan.innerHTML = 'Min Energy: ';
-	xkspan.style.color = '#000';
-	xkdiv.appendChild(xkspan);
-
-	var xkinput = document.createElement('input');
-	xkinput.id = 'xkminenergy';
-	xkinput.type = 'number';
-	xkinput.style.marginRight = '5px';
-	xkinput.min = 0;
-	xkinput.max = 10;
-	xkdiv.appendChild(xkinput);
-
-	var xkinput = document.createElement('input');
-	xkinput.id = 'xkapply';
-	xkinput.type = 'button';
-	xkinput.classList.add('green_text_button');
-	xkinput.style.marginRight = '5px';
-	xkinput.value = 'Apply';
-	xkinput.addEventListener("click", function() {
-		var xkWInput = document.getElementById('xkworld');
-		var xkFEInput = document.getElementById('xkfightenergy');
-		var xkMEInput = document.getElementById('xkminenergy');
-		var xkW = xkWInput.value - 0;
-		var xkFE = xkFEInput.value - 0;
-		var xkME = xkMEInput.value - 0;
-		if (xkW) {
-			setXKVariable('XKWORLD', xkW);
-			xkWInput.value = '';
+		for (var i = 0; i < Trolls.length; i++) {
+			var xka = document.createElement('a');
+			xka.href = '/battle.html?id_troll=' + (i+1);
+			xka.innerHTML = Trolls[i];
+			xkinnerdiv.appendChild(xka);
+			xkinnerdiv.append(document.createElement('br'));
 		}
-		if (xkFE) {
-			setXKVariable('XKFIGHTENERGY', xkFE);
-			xkFEInput.value = '';
-		}
-		if (xkME) {
-			setXKVariable('XKMINENERGY', xkME);
-			xkMEInput.value = '';
-		}
-	});
-	xkdiv.appendChild(xkinput);
+		
+		xktrolldiv.appendChild(xkinnerdiv);
+		
+		document.querySelector('#contains_all > header [type=energy_fight]').appendChild(xktrolldiv);
+	}
+	
+	function createXKForm() {
+		var xkdiv = document.createElement('div');
+		xkdiv.id = 'xkdiv';
+		xkdiv.style.position = 'absolute';
+		xkdiv.style.bottom = '40px';
+		xkdiv.style.right = '40px';
+		xkdiv.style.padding = '15px';
+		xkdiv.classList.add('base_block');
+		xkdiv.style.zIndex = 400;
 
-	var xkinput = document.createElement('input');
-	xkinput.id = 'xkswitch';
-	xkinput.type = 'button';
-	xkinput.classList.add('blue_text_button');
-	xkinput.value = 'Switch';
-	xkinput.addEventListener("click", function() {
-		setXKVariable('XKSWITCH', !xkmap['XKSWITCH'], function() {
-			if (window.location.href.indexOf('/home.html') === -1) {
-				window.location.reload();
+		var xkspan = document.createElement('span');
+		xkspan.innerHTML = 'World: ';
+		xkspan.style.color = '#000';
+		xkdiv.appendChild(xkspan);
+
+		var xkinput = document.createElement('input');
+		xkinput.id = 'xkworld';
+		xkinput.type = 'number';
+		xkinput.style.marginRight = '5px';
+		xkinput.min = 0;
+		xkinput.max = 10;
+		xkdiv.appendChild(xkinput);
+
+		var xkspan = document.createElement('span');
+		xkspan.innerHTML = 'Fight Energy: ';
+		xkspan.style.color = '#000';
+		xkdiv.appendChild(xkspan);
+
+		var xkinput = document.createElement('input');
+		xkinput.id = 'xkfightenergy';
+		xkinput.type = 'number';
+		xkinput.style.marginRight = '5px';
+		xkinput.min = 0;
+		xkinput.max = 10;
+		xkdiv.appendChild(xkinput);
+
+		var xkspan = document.createElement('span');
+		xkspan.innerHTML = 'Min Energy: ';
+		xkspan.style.color = '#000';
+		xkdiv.appendChild(xkspan);
+
+		var xkinput = document.createElement('input');
+		xkinput.id = 'xkminenergy';
+		xkinput.type = 'number';
+		xkinput.style.marginRight = '5px';
+		xkinput.min = 0;
+		xkinput.max = 10;
+		xkdiv.appendChild(xkinput);
+
+		var xkinput = document.createElement('input');
+		xkinput.id = 'xkapply';
+		xkinput.type = 'button';
+		xkinput.classList.add('green_text_button');
+		xkinput.style.marginRight = '5px';
+		xkinput.value = 'Apply';
+		xkinput.addEventListener("click", function() {
+			var xkWInput = document.getElementById('xkworld');
+			var xkFEInput = document.getElementById('xkfightenergy');
+			var xkMEInput = document.getElementById('xkminenergy');
+			var xkW = xkWInput.value - 0;
+			var xkFE = xkFEInput.value - 0;
+			var xkME = xkMEInput.value - 0;
+			if (xkW) {
+				setXKVariable('XKWORLD', xkW);
+				xkWInput.value = '';
+			}
+			if (xkFE) {
+				setXKVariable('XKFIGHTENERGY', xkFE);
+				xkFEInput.value = '';
+			}
+			if (xkME) {
+				setXKVariable('XKMINENERGY', xkME);
+				xkMEInput.value = '';
 			}
 		});
-	});
-	xkdiv.appendChild(xkinput);
+		xkdiv.appendChild(xkinput);
 
-	document.body.appendChild(xkdiv);
+		var xkinput = document.createElement('input');
+		xkinput.id = 'xkswitch';
+		xkinput.type = 'button';
+		xkinput.classList.add('blue_text_button');
+		xkinput.style.marginRight = '5px';
+		xkinput.value = 'Switch';
+		xkinput.addEventListener("click", function() {
+			setXKVariable('XKSWITCH', !xkmap['XKSWITCH'], function() {
+				if (window.location.href.indexOf('/home.html') === -1) {
+					window.location.reload();
+				}
+			});
+		});
+		xkdiv.appendChild(xkinput);
+
+		var xkinput = document.createElement('input');
+		xkinput.id = 'xkreset';
+		xkinput.type = 'button';
+		xkinput.classList.add('blue_text_button');
+		xkinput.value = 'Reset Timeout';
+		xkinput.addEventListener("click", function() {
+			resetXKHomeTimeout();
+		});
+		xkdiv.appendChild(xkinput);
+
+		document.body.appendChild(xkdiv);
+	}
+	
+	createXKTrollMenu();
+	createXKForm();
 }
 
 var login = document.querySelectorAll('a[rel="phoenix_member_login"]');
@@ -408,7 +506,7 @@ function doXKThings() {
 		getXKFightVariables();
 		
 		setTimeout(function() {
-			if (xkmap['XKWORLD'] == (troll + 1) && document.querySelector('.energy_counter[type="energy_fight"] span[energy]').innerText > xkmap['XKMINENERGY']) {
+			if (xkmap['XKWORLD'] === (troll + 1) && document.querySelector('.energy_counter[type="energy_fight"] span[energy]').innerText > xkmap['XKMINENERGY']) {
 				setTimeout(function() {
 					//document.querySelectorAll('button[rel="launch"]')[0].click();
 					xkevent(document.querySelector('button[rel="launch"]'), 'click');
