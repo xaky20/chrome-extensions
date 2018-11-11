@@ -18,6 +18,9 @@
 	},{
 	"js": ["kissmanga.js"],
 	"matches": ["https://kissmanga.com/*"]
+	},{
+	"js": ["isekailunatic.js"],
+	"matches": ["https://isekailunatic.wordpress.com/*"]
 	}],
 	
     "icons": {
