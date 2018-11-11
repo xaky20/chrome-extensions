@@ -30,19 +30,19 @@ function addToggleButton(elem) {
 		element.classList.add('xktitle');
 		element.style.backgroundColor = '#5b5b5b';
 		element.type = 'button';
-		element.value = 'show';
+		element.value = 'Show';
 		element.onclick = function() { // Note this is a function
 			if (elem.style.display === 'none') {
 				elem.style.display = 'inline-block';
-				element.value = 'hide';
+				element.value = 'Hide';
 			} else {
 				elem.style.display = 'none';
-				element.value = 'show';
+				element.value = 'Show';
 			}
 		};
 
-		elem.parentNode.appendChild(element);
-		//elem.parentNode.insertBefore(element, elem);
+		//elem.parentNode.appendChild(element);
+		elem.parentNode.insertBefore(element, elem.nextSibling);
 	}
 }
 
@@ -59,9 +59,9 @@ onkeydown = onkeyup = function(e) {
 	xakyup[e.keyCode] = e.type == 'keydown';
 	
 	if (xakyup[17] && xakyup[38]) {
-		document.querySelectorAll('.xktitle').forEach(el => el.previousElementSibling.style.display = 'none');
+		document.querySelectorAll('.xktitle').forEach(function(el) { el.previousElementSibling.style.display = 'none'; el.value = 'Show'; } );
     } else if (xakyup[17] && xakyup[40]) {
-		document.querySelectorAll('.xktitle').forEach(el => el.previousElementSibling.style.display = 'inline-block');
+		document.querySelectorAll('.xktitle').forEach(function(el) { el.previousElementSibling.style.display = 'inline-block'; el.value = 'Hide'; } );
     }
 	if (e.keyCode !== 17 && e.keyCode !== 38 && e.keyCode !== 40) {
 		xakyup = {};
