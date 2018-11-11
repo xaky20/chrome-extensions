@@ -1,6 +1,8 @@
-document.getElementById('divReadContent').style.fontSize = '1.4em';
-console.log('font-size to 1.4em');
-
+var el = document.getElementById('divReadContent');
+if (el) {
+	el.style.fontSize = '1.4em':
+	console.log('font-size to 1.4em');
+}
 
 var aButtonSmall = document.querySelectorAll("a.button.small");
 var xaky_next = aButtonSmall[1],
