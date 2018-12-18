@@ -171,7 +171,7 @@ function createXKVariableForm() {
 		
 		xktrolldiv.appendChild(xkinnerdiv);
 		
-		document.querySelector('#contains_all > header [type=energy_fight]').appendChild(xktrolldiv);
+		document.querySelector('.energy_counter[type="energy_fight"]').appendChild(xktrolldiv);
 	}
 	
 	function createXKForm() {
@@ -544,10 +544,10 @@ function doXKThings() {
 	} else if (window.location.href.indexOf('/pachinko.html') !== -1) {
 		console.log('FREE PACHINKO');
 		
-		if (document.querySelector('button.blue_text_button[free="1"]')) {
+		if (document.querySelector('button.blue_button_L[free="1"]')) {
 			setTimeout(function() {
-				//document.querySelector('button.blue_text_button[free="1"]').click();
-				xkevent(document.querySelector('button.blue_text_button[free="1"]'), 'click');
+				//document.querySelector('button.blue_button_L[free="1"]').click();
+				xkevent(document.querySelector('button.blue_button_L[free="1"]'), 'click');
 			}, myRandom('free', 5000, 8000));
 		}
 		setTimeout(function() {
@@ -558,7 +558,8 @@ function doXKThings() {
 	} else if (window.location.href.indexOf('/tower-of-fame.html') !== -1) {
 		console.log('TOWER OF FAME');
 		
-		var xaky_table = document.querySelectorAll('table')[5];
+		//var xaky_table = document.querySelectorAll('table')[3];
+		var xaky_table = document.querySelector('.leagues_table .leadTable');
 		if (xaky_table) {
 			//check battle point
 			var battlePoint = (document.querySelectorAll('span[energy]')[2].innerText-0) || 0;
@@ -583,7 +584,7 @@ function doXKThings() {
 							setTimeout(function() {
 								//document.querySelector('.blue_button_L').click();
 								xkevent(document.querySelector('.blue_button_L'), 'click');
-							}, myRandom('challengeTower', 500, 1000));
+							}, myRandom('challengeTower', 1500, 3000));
 						}
 					}
 				}
