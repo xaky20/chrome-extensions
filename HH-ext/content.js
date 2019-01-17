@@ -73,17 +73,17 @@ function setXKFight(xkworld, xkfight, xkmin) {
 function getXKFightVariables() {
 	getXKVariable('XKWORLD', function() {
 		if (!xkmap['XKWORLD']) {
-			setXKVariable('XKWORLD', 10);
+			setXKVariable('XKWORLD', 11);
 		}
 	});
 	getXKVariable('XKFIGHTENERGY', function() {
 		if (!xkmap['XKFIGHTENERGY']) {
-			setXKVariable('XKFIGHTENERGY', 18);
+			setXKVariable('XKFIGHTENERGY', 17);
 		}
 	});
 	getXKVariable('XKMINENERGY', function() {
 		if (!xkmap['XKMINENERGY']) {
-			setXKVariable('XKMINENERGY', 15);
+			setXKVariable('XKMINENERGY', 12);
 		}
 	});
 }
@@ -159,7 +159,7 @@ function createXKVariableForm() {
 		var xkinnerdiv = document.createElement('div');
 		xkinnerdiv.classList.add('xkTrollMenu');
 		
-		var Trolls = ['Dark Lord', 'Ninja Spy', 'Gruntt', 'Edwarda', 'Donatien', 'Silvanus', 'Bremen', 'Finalmecia', 'Roko Senseï'];
+		var Trolls = ['Dark Lord', 'Ninja Spy', 'Gruntt', 'Edwarda', 'Donatien', 'Silvanus', 'Bremen', 'Finalmecia', 'Roko Senseï', 'Karole'];
 
 		for (var i = 0; i < Trolls.length; i++) {
 			var xka = document.createElement('a');
@@ -171,7 +171,15 @@ function createXKVariableForm() {
 		
 		xktrolldiv.appendChild(xkinnerdiv);
 		
-		document.querySelector('.energy_counter[type="energy_fight"]').appendChild(xktrolldiv);
+		var appendDiv = document.querySelector('.energy_counter[type="energy_fight"]');
+		
+		if (appendDiv) {
+			appendDiv.appendChild(xktrolldiv);
+		} else {
+			setTimeout(function() {
+				createXKTrollMenu();
+			}, 1000);
+		}
 	}
 	
 	function createXKForm() {
@@ -303,7 +311,7 @@ if (login.length !== 0) {
 			//console.log('last_connected set value ' + last_connected);
 		}
 		
-		console.log('Connecting with email ' + last_connected ? '12024800@usherbrooke.ca' : 'six37v@hotmail.fr');
+		console.log('Connecting with email ' + (last_connected ? '12024800@usherbrooke.ca' : 'six37v@hotmail.fr'));
 		inputs[0].value = last_connected ? '12024800@usherbrooke.ca' : 'six37v@hotmail.fr'; // 3F8C0AF5-E5B8-483D-A172-4309F19E3BD1   :   72C7F05B-3E52-4565-820F-F9CABC2F7449
 		inputs[1].value = '02six37v';
 		
@@ -471,18 +479,18 @@ function doXKThings() {
 			}, myRandom('home', 4500, 10500));
 		}
 		
-		if (blueButtons[0].innerText.indexOf('Continue') !== -1) {
-			if (document.querySelector('.after_gift').style.display !== 'block') {
+		//if (blueButtons[0].innerText.indexOf('Continue') !== -1) {
+			if (document.querySelector('.end_gift').style.display === 'block') {
 				setTimeout(function() {
 					//document.querySelector('.end_gift button').click();
 					xkevent(document.querySelector('.end_gift button'), 'click');
 				}, myRandom('end gift', 1000, 3000));
 				setTimeout(function() {
-					window.location = '/activities.html';
-				}, myRandom('activities', 3000, 5000));
-			} else {
-				claim();
-			}
+					window.location = '/home.html';
+				}, myRandom('home', 3000, 5000));
+			//} else {
+			//	claim();
+			//}
 		} else {
 			if (blueButtons[0].style.display === 'none') {
 				claim();
