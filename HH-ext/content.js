@@ -345,18 +345,18 @@ if (login.length !== 0) {
 	}
 	
 	var checkArena = function() {
-		var notif1 = document.querySelectorAll('.collect_notif')[0].style.display;
-		if (notif1 !== 'none') {
+		var notif1 = document.querySelector('a[rel="battles"] .button-notification-icon'); //document.querySelectorAll('.collect_notif')[0].style.display; //.button-notification-icon
+		if (notif1) {
 			window.location = '/arena.html';
 		}
 		// console.log('arena checked');
 	}
 	
 	var checkActivity = function() {
-		var notif2 = document.querySelectorAll('.collect_notif')[1].style.display;
-		var bar1 = document.querySelectorAll('#home_missions_bar1')[0].style.display;
-		var bar2 = document.querySelectorAll('#home_missions_bar2')[0].style.display;
-		if (notif2 !== 'none' || (bar2 === 'none' && bar1 === 'none')) {
+		var notif2 = document.querySelector('a[rel="activities"] .button-notification-icon');
+		var bar1 = document.querySelector('#home_missions_bar1').style.display;
+		var bar2 = document.querySelector('#home_missions_bar2').style.display;
+		if (notif2 || (bar2 === 'none' && bar1 === 'none')) {
 			window.location = '/activities.html';
 		}
 		// console.log('activity checked');

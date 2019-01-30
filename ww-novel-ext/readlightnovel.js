@@ -1,9 +1,16 @@
 document.querySelectorAll('script').forEach(function(s) { s.remove(); });
 document.querySelectorAll('iframe').forEach(function(s) { s.remove(); });
-document.querySelectorAll('style').forEach(function(s) { s.remove(); });
 
-var xaky_next,
-	xaky_prev;
+document.querySelector('.content2').classList.remove('col-lg-8');
+document.querySelector('.content2').classList.add('col-lg-12');
+document.querySelector('.sidebar').remove();
+
+document.querySelector('body').style.background = 'none';
+
+document.querySelectorAll('.container').forEach(function(c) { c.style.border = '1px solid black'; });
+
+var xaky_next = document.querySelector('a.next'),
+	xaky_prev = document.querySelector('a.prev');
 
 var xakyup = {};
 onkeydown = onkeyup = function(e) {
@@ -22,14 +29,3 @@ onkeydown = onkeyup = function(e) {
 		xakyup = {};
 	}
 }
-
-setTimeout(function() {
-	document.getElementById('divImage').style.display = 'inline';
-	console.log('Show divImage again');
-	document.cookie = 'gogl1=; expires=' + new Date(0).toUTCString() +'; path=/';
-	console.log('Removed gogl1 cookie');
-	xaky_next = document.querySelector(".btnNext").parentElement;
-	xaky_prev = document.querySelector(".btnPrevious").parentElement;
-}, 3500);
-
-// document.querySelectorAll('#divImage img').forEach(function(i) { console.log(i.src); })

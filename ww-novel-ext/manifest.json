@@ -21,6 +21,9 @@
 	},{
 	"js": ["isekailunatic.js"],
 	"matches": ["https://isekailunatic.wordpress.com/*"]
+	},{
+	"js": ["readlightnovel.js"],
+	"matches": ["https://www.readlightnovel.org/*"]
 	}],
 	
     "icons": {
