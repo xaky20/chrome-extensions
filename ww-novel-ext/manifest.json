@@ -24,6 +24,9 @@
 	},{
 	"js": ["readlightnovel.js"],
 	"matches": ["https://www.readlightnovel.org/*"]
+	},{
+	"js": ["lightnovelstranslations.js"],
+	"matches": ["https://lightnovelstranslations.com/*"]
 	}],
 	
     "icons": {
