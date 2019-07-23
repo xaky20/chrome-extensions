@@ -4,6 +4,7 @@ document.querySelectorAll('iframe').forEach(div => div.remove());
 setTimeout(function() {
 	document.getElementById('bottom-banner-ads').remove();
 	console.log('Remove anti-addblock popup');
+	xaky_select = document.querySelector('._2d0an.lefgy select'); // In case it wasn't here yet
 }, 1000);
 //document.getElementById('bottom-banner-ads').remove();
 //console.log('Anti-addblock popups');
