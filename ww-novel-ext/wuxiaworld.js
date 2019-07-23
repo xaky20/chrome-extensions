@@ -12,8 +12,8 @@ var panels = document.querySelectorAll('.panel');
 for (var i = 0; i < panels.length; i++) {
 	panels[i].style.fontSize = '20px';
 }
-document.querySelectorAll('p span').forEach(el => el.style.fontSize = '20px');
-console.log('font size 20');
+document.querySelectorAll('p span').forEach(el => el.style.fontSize = '24px');
+console.log('font size 24px');
 var views = document.querySelectorAll('.fr-view');
 for (var i = 0; i < views.length; i++) {
 	views[i].style.padding = '12px';

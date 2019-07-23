@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	
 	"name": "WW & novelplanet customization",
-	"version": "0.1",
+	"version": "1.0.0",
 	"description": "Make content more readable and remove sidebar",
 	"author": "Xaky",
 	
@@ -24,6 +24,9 @@
 	},{
 	"js": ["readlightnovel.js"],
 	"matches": ["https://www.readlightnovel.org/*"]
+	},{
+	"js": ["mangarock.js"],
+	"matches": ["https://mangarock.com/*"]
 	},{
 	"js": ["lightnovelstranslations.js"],
 	"matches": ["https://lightnovelstranslations.com/*"]
