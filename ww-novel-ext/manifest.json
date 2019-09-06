@@ -26,6 +26,7 @@
 	"matches": ["https://www.readlightnovel.org/*"]
 	},{
 	"js": ["mangarock.js"],
+	"css": ["mangarock.css"],
 	"matches": ["https://mangarock.com/*"]
 	},{
 	"js": ["lightnovelstranslations.js"],

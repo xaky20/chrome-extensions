@@ -2,6 +2,7 @@ var el = document.getElementById('divReadContent');
 if (el) {
 	el.style.fontSize = '1.4em';
 	console.log('font-size to 1.4em');
+	document.querySelectorAll('#divReadContent > div').forEach(d=>d.remove());
 }
 
 var aButtonSmall = document.querySelectorAll("a.button.small");

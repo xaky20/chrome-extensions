@@ -1,11 +1,12 @@
 
 /* javascript (no jQuery) */
-var rowDivs = document.querySelector('.row').children;
-rowDivs[0].classList.remove('col-lg-9');
-rowDivs[0].classList.remove('col-md-8');
-rowDivs[0].classList.add('col-12');
+var content = document.querySelector('#content-container');
+content.classList.remove('col-lg-9');
+content.classList.remove('col-md-8');
+content.classList.add('col-12');
+content.firstChild.remove();
 console.log('content full-width');
-rowDivs[1].remove();
+document.querySelector('#sidebar').remove();
 console.log('sidebar removed');
 var panels = document.querySelectorAll('.panel');
 
@@ -18,6 +19,8 @@ var views = document.querySelectorAll('.fr-view');
 for (var i = 0; i < views.length; i++) {
 	views[i].style.padding = '12px';
 }
+document.querySelector('.pw-1').remove();
+document.querySelector('.pw-2').remove();
 
 var chapterTitle = document.querySelector('.caption.clearfix h4');
 var chapterName = document.querySelectorAll('.fr-view p');

@@ -13,7 +13,7 @@ var popup = document.querySelectorAll('.NDm_P');
 var popupRemover = function() {
 	popup = document.querySelectorAll('.NDm_P');
 	if (popup.length) {
-		popup.forEach(div => div.remove());
+		popup.forEach(div => div.parentElement.parentElement.remove());
 	}
 }
 document.addEventListener("scroll", popupRemover);
