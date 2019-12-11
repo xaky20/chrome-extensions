@@ -8,19 +8,19 @@ content.firstChild.remove();
 console.log('content full-width');
 document.querySelector('#sidebar').remove();
 console.log('sidebar removed');
-var panels = document.querySelectorAll('.panel');
-
+/*var panels = document.querySelectorAll('.panel');
 for (var i = 0; i < panels.length; i++) {
-	panels[i].style.fontSize = '20px';
-}
-document.querySelectorAll('p span').forEach(el => el.style.fontSize = '24px');
-console.log('font size 24px');
+	panels[i].style.fontSize = '22px';
+}*/
+document.querySelectorAll('.panel').forEach(el => el.style.fontSize = '22px');
+document.querySelectorAll('p span').forEach(el => el.style.fontSize = '22px');
+console.log('font size 22px');
 var views = document.querySelectorAll('.fr-view');
 for (var i = 0; i < views.length; i++) {
 	views[i].style.padding = '12px';
 }
-document.querySelector('.pw-1').remove();
-document.querySelector('.pw-2').remove();
+//document.querySelector('.pw-1')?.remove();
+//document.querySelector('.pw-2').remove();
 
 var chapterTitle = document.querySelector('.caption.clearfix h4');
 var chapterName = document.querySelectorAll('.fr-view p');
